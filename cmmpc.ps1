@@ -57,29 +57,29 @@ try {
 Write-Host "3/4 Uklízím hlavní panel (Hledání, Zobrazení úkolů, Widgety)..." -ForegroundColor Yellow
 
 # Skrytí vyhledávacího pole (0 = skryto)
-Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Search" -Name "SearchboxTaskbarMode" -Value 0 
+Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Search" -Name "SearchboxTaskbarMode" -Value 0
 # Skrytí tlačítka Zobrazení úkolů (Task View)
-Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name "ShowTaskViewButton" -Value 0 
+Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name "ShowTaskViewButton" -Value 0
 # Skrytí Widgetů
-Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name "TaskbarDa" -Value 0 e
+Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name "TaskbarDa" -Value 0
 
 
 # --- 4. PRŮZKUMNÍK, BING A COPILOT ---
 Write-Host "4/4 Nastavuji Průzkumníka, vypínám Bing a Copilot..." -ForegroundColor Yellow
 
 # Zobrazení přípon souborů
-Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name "HideFileExt" -Value 0 
+Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name "HideFileExt" -Value 0
 
 # Vypnutí Bing vyhledávání ve Start menu (Dvojitá pojistka: Uživatelská + GPO)
-Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Search" -Name "BingSearchEnabled" -Value 0 
+Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Search" -Name "BingSearchEnabled" -Value 0
 $SearchPolicyPath = "HKCU:\Software\Policies\Microsoft\Windows\Explorer"
 if (!(Test-Path $SearchPolicyPath)) { New-Item -Path $SearchPolicyPath -Force | Out-Null }
-Set-ItemProperty -Path $SearchPolicyPath -Name "DisableSearchBoxSuggestions" -Value 1 
+Set-ItemProperty -Path $SearchPolicyPath -Name "DisableSearchBoxSuggestions" -Value 1
 
 # Zákaz Windows Copilot (GPO)
 $CopilotPolicyPath = "HKCU:\Software\Policies\Microsoft\Windows\WindowsCopilot"
 if (!(Test-Path $CopilotPolicyPath)) { New-Item -Path $CopilotPolicyPath -Force | Out-Null }
-Set-ItemProperty -Path $CopilotPolicyPath -Name "TurnOffWindowsCopilot" -Value 1 
+Set-ItemProperty -Path $CopilotPolicyPath -Name "TurnOffWindowsCopilot" -Value 1
 
 
 # --- 5. DOKONČENÍ A RESTART UI ---
